@@ -1,5 +1,5 @@
 package com.example.tournamnetproj;
 
 
-public class FilterPage {
+public class FilterPageController {
 }
