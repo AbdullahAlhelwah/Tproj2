@@ -8,8 +8,11 @@ public class Team implements Comparable<Team>{
     private Tournament tournament;
     private int goalsScored;
     private int goalsReceived;
+    private int goalDifference;
     private int points;            // this varibale represent the current round if eliminatinon
     private int wins;
+    private int losses;
+    private int draws;
     // for individual tournaments
     public Team(Tournament t,Student s){
         this(t,s.getName());
@@ -57,11 +60,18 @@ public class Team implements Comparable<Team>{
     public ArrayList<Student> getMembers() {
         return members;
     }
-
-
-
-
-
+    public int getLosses() {
+        return losses;
+    }
+    public int getWins() {
+        return wins;
+    }
+    public int getDraws() {
+        return draws;
+    }
+    public int getGoalDifference() {
+        return goalDifference;
+    }
 
     public void addStudent(Student stu) throws Exception{
         if(stu.participateIn(tournament)){
@@ -78,14 +88,19 @@ public class Team implements Comparable<Team>{
         }else throw new Exception("the student is not in the team");
 
     }
+    public void updateGoalDifference(){
+        this.goalDifference = this.goalsScored - this.goalsReceived;
+    }
 
 
     // team setters
     public void addGoalsReceived(int goalsReceived) {
         this.goalsReceived += goalsReceived;
+        updateGoalDifference();
     }
     public void addGoalsScored(int goalsScored) {
         this.goalsScored += goalsScored;
+        updateGoalDifference();
     }
     public void addPoints(int points) {
         this.points += points;
@@ -119,4 +134,6 @@ public class Team implements Comparable<Team>{
     public String toString(){
         return name;
     }
+
+
 }

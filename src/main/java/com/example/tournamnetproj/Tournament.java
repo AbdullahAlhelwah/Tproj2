@@ -1,4 +1,7 @@
 package com.example.tournamnetproj;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.Date;
 import java.util.ArrayList;
 
@@ -7,7 +10,7 @@ abstract public class Tournament {
     private String name;
     private boolean isIndividual;
     private String sport;
-    private ArrayList<Team> teams;
+    private ObservableList<Team> teams;
     private Date startDate;
     private Date endDate;
     private boolean hasFinished;
@@ -21,7 +24,7 @@ abstract public class Tournament {
         this.sport = sport;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.teams = new ArrayList<Team>();
+        this.teams = FXCollections.observableArrayList();
         this.hasFinished = false;
     }
     // another constructor without endDate; atomaticlly set by the system
@@ -30,7 +33,7 @@ abstract public class Tournament {
         this.isIndividual = isIndividual;
         this.sport = sport;
         this.startDate = startDate;
-        this.teams = new ArrayList<Team>();
+        this.teams = FXCollections.observableArrayList();
         this.hasFinished = false;
     }
 
@@ -50,7 +53,7 @@ abstract public class Tournament {
     public String getSport() {
         return sport;
     }
-    public ArrayList<Team> getTeams() {
+    public ObservableList<Team> getTeams() {
         return teams;
     }
     public int getNumberOfTeams() {
