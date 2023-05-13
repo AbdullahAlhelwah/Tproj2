@@ -11,6 +11,9 @@ public class Main {
 
     // a method to save the tournaments objects to a file named "tournaments.bin"
     private static void saveTournaments() {
+        //if there are no tournament to save, just exit
+        if(tournaments.length == 0)
+            return;
         try {
             // Open an output stream to save the tournaments to the file
             FileOutputStream fos = new FileOutputStream("tournaments.bin");
@@ -35,6 +38,9 @@ public class Main {
 
     // a method to load the tournaments objects from a file named "tournaments.bin"
     public static Tournament[] loadTournaments() throws IOException, ClassNotFoundException {
+        // if file does not exist, just exit
+        if(!new File("tournaments.bin").exists())
+            return null;
         // Open an input stream to read from the file
         FileInputStream fis = new FileInputStream("tournaments.bin");
         ObjectInputStream ois = new ObjectInputStream(fis);
