@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
-public class Elimination extends Tournament{
+public class Elimination extends Tournament implements java.io.Serializable{
     // attributes
 
 

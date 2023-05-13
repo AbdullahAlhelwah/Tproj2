@@ -2,15 +2,16 @@ package com.example.tournamnetproj;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.ArrayList;
 
-abstract public class Tournament {
+abstract public class Tournament implements Serializable {
     // attributes
     private String name;
     private boolean isIndividual;
     private String sport;
-    private ObservableList<Team> teams;
+    private transient ObservableList<Team> teams;
     private Date startDate;
     private Date endDate;
     private boolean hasFinished;
@@ -27,7 +28,7 @@ abstract public class Tournament {
         this.teams = FXCollections.observableArrayList();
         this.hasFinished = false;
     }
-    // another constructor without endDate; atomaticlly set by the system
+    // another constructor without endDate; automatically set by the system
     public Tournament(String name, boolean isIndividual, String sport, Date startDate) {
         this.name = name;
         this.isIndividual = isIndividual;
@@ -96,4 +97,13 @@ abstract public class Tournament {
         return null;
     }
 
+    public String getDetails() {
+        String Details = "Name: " + name + "\n" +
+                "Sport: " + sport + "\n" +
+                "Start Date: " + startDate + "\n" +
+                "End Date: " + endDate + "\n" +
+                "Number of Teams: " + teams.size() + "\n" +
+                "Winner: " + winner + "\n";
+        return Details;
+    }
 }

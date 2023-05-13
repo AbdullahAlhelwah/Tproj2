@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
-public class RoundRobin extends Tournament{
+public class RoundRobin extends Tournament implements java.io.Serializable{
 
 
     // constructor

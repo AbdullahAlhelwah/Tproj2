@@ -59,7 +59,6 @@ public class SignInController{
                 content.append(inputLine);
             }
             // print response body
-            System.out.println(content);
             in.close();
 
             // set the name, isAdmin, and email
