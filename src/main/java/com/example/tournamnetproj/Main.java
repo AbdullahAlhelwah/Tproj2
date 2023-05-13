@@ -1,10 +1,11 @@
 package com.example.tournamnetproj;
 import java.io.*;
+import java.util.ArrayList;
 
 public class Main {
-    public static Tournament[] tournaments;
+    public static ArrayList<Tournament> tournaments = new ArrayList<>();
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        tournaments = loadTournaments();
+        loadTournaments();
         HelloApplication.main(args);
         saveTournaments();
     }
@@ -12,7 +13,7 @@ public class Main {
     // a method to save the tournaments objects to a file named "tournaments.bin"
     private static void saveTournaments() {
         //if there are no tournament to save, just exit
-        if(tournaments.length == 0)
+        if(tournaments == null)
             return;
         try {
             // Open an output stream to save the tournaments to the file
@@ -20,7 +21,7 @@ public class Main {
             ObjectOutputStream oos = new ObjectOutputStream(fos);
 
             // Write the number of tournaments to the file
-            oos.writeInt(tournaments.length);
+            oos.writeInt(tournaments.size());
 
             // Write each tournament to the file
             for (Tournament tournament : tournaments) {
@@ -37,10 +38,10 @@ public class Main {
     }
 
     // a method to load the tournaments objects from a file named "tournaments.bin"
-    public static Tournament[] loadTournaments() throws IOException, ClassNotFoundException {
+    public static void loadTournaments() throws IOException, ClassNotFoundException {
         // if file does not exist, just exit
         if(!new File("tournaments.bin").exists())
-            return null;
+            return;
         // Open an input stream to read from the file
         FileInputStream fis = new FileInputStream("tournaments.bin");
         ObjectInputStream ois = new ObjectInputStream(fis);
@@ -48,20 +49,18 @@ public class Main {
         // Read the number of tournaments from the file
         int numTournaments = ois.readInt();
 
-        // Create an array to hold the tournaments
-        Tournament[] tournaments = new Tournament[numTournaments];
 
         // Read each tournament from the file and store it in the array
         for (int i = 0; i < numTournaments; i++) {
             Tournament tournament = (Tournament) ois.readObject();
             if (tournament instanceof Elimination) {
                 Elimination elimination = (Elimination) tournament;
-                tournaments[i] = elimination;
+                tournaments.add(elimination);
             } else if (tournament instanceof RoundRobin) {
                 RoundRobin roundRobin = (RoundRobin) tournament;
-                tournaments[i] = roundRobin;
+                tournaments.add(roundRobin) ;
             } else {
-                tournaments[i] = tournament;
+                tournaments.add(tournament);
             }
         }
 
@@ -69,8 +68,6 @@ public class Main {
         ois.close();
         fis.close();
 
-        // Return the array of tournaments
-        return tournaments;
     }
 
 

@@ -2,6 +2,7 @@ package com.example.tournamnetproj;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -31,21 +32,22 @@ public class firstPageController implements Initializable {
     @FXML
     TextFlow textFlow;
 
-    Tournament[] tournaments = Main.tournaments;
 
     // this array will be used to populate the ListView.
-    String[] currentTournament = new String[tournaments.length];
+
+    String[] currentTournament = new String[Main.tournaments.size()];
+
     {
-        for(int i = 0; i < tournaments.length; i++) {
-            currentTournament[i] = tournaments[i].getName();
+        for(int i = 0; i < Main.tournaments.size(); i++) {
+            currentTournament[i] = Main.tournaments.get(i).getName();
         }
     }
 
     // this array is to display the details of a tournament.
-    Tournament[] currentTournamentT = new Tournament[tournaments.length];
+    Tournament[] currentTournamentT = new Tournament[Main.tournaments.size()];
     {
-        for(int i = 0; i < tournaments.length; i++) {
-            currentTournamentT[i] = tournaments[i];
+        for(int i = 0; i < Main.tournaments.size(); i++) {
+            currentTournamentT[i] = Main.tournaments.get(i);
         }
     }
 
