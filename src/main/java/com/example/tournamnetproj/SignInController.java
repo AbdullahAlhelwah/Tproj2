@@ -1,14 +1,22 @@
 package com.example.tournamnetproj;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.EventObject;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class SignInController{
     private String name;
@@ -78,7 +86,10 @@ public class SignInController{
             label.setText("Welcome " + name);
             label.setStyle("-fx-text-fill: black;");
 
+            //switch to the next page
+            switchToFirstPage(event, isAdmin);
             return;
+
         }
         // if missing params, print "missing params"
         else if (status == 400) {
@@ -107,7 +118,36 @@ public class SignInController{
     }
 
 
+    public void switchToFirstPage(ActionEvent event, Boolean isAdmin) {
+        Stage stage;
+        Scene scene;
+        Parent root;
+
+        try {
+            root = FXMLLoader.load(getClass().getResource("firstPage.fxml"));
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            //change the visibility of login button
+            Button loginButton = (Button) scene.lookup("#loginButton");
+            loginButton.setVisible(false);
+            //if admin, change the visibility of add tournament button
+            if (isAdmin) {
+                Button addTournamentButton = (Button) scene.lookup("#addTournamentButton");
+                addTournamentButton.setVisible(true);
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
+
+
+
 
 
 

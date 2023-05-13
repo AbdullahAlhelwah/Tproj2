@@ -1,7 +1,6 @@
 package com.example.tournamnetproj;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -73,10 +72,10 @@ public class RoundRobinTableController implements Initializable {
         System.out.println(list);
         System.out.println(r.getTeams());
 
-        FXCollections.sort(r.getTeams());
+        FXCollections.sort(FXCollections.observableArrayList(r.getTeams()));
         System.out.println(r.getTeams());
 
-        table.setItems(r.getTeams());
+        table.setItems(FXCollections.observableArrayList(r.getTeams()));
 
 
     }

@@ -12,7 +12,7 @@ public class Elimination extends Tournament implements java.io.Serializable{
         super(name, isIndividual, sport, startDate, endDate);
         this.matches = new ArrayList<Match>();
     }
-    // another constructor without endDate; atomaticlly set by the system
+    // another constructor without endDate; automatically set by the system
     public Elimination(String name, boolean isIndividual, String sport, Date startDate) {
         super(name, isIndividual, sport, startDate);
         matches = new ArrayList<Match>();

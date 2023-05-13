@@ -11,7 +11,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="733.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tournamnetproj.firstPageController">
     <children>
-        <Button fx:id="myButton" layoutX="553.0" layoutY="436.0" mnemonicParsing="false" onAction="#switchToLogInPage" stylesheets="@style.css" text="Log In" />
+        <Button fx:id="loginButton" layoutX="553.0" layoutY="436.0" mnemonicParsing="false" onAction="#switchToLogInPage" stylesheets="@style.css" text="Log In" />
+        <Button fx:id="addTournamentButton" layoutX="553.0" layoutY="436.0" mnemonicParsing="false" onAction="#addTournament" stylesheets="@style.css" text="Add Tournament" visible="false" />
         <ListView fx:id="currentTournaments" layoutX="82.0" layoutY="137.0" prefHeight="266.0" prefWidth="152.0">
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -33,7 +34,7 @@
         <TextFlow fx:id="textFlow" layoutX="82.0" layoutY="446.0" prefHeight="80.0" prefWidth="383.0" />
         <Label layoutX="228.0" layoutY="45.0" text="Tournaments Schedule">
             <font>
-                <Font name="System Bold" size="24.0" />
+                <Font name="System Bold" size="18.0" />
             </font>
         </Label>
     </children>

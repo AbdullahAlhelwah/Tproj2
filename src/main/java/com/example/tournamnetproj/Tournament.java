@@ -11,7 +11,7 @@ abstract public class Tournament implements Serializable {
     private String name;
     private boolean isIndividual;
     private String sport;
-    private transient ObservableList<Team> teams;
+    private ArrayList<Team> teams;
     private Date startDate;
     private Date endDate;
     private boolean hasFinished;
@@ -25,7 +25,7 @@ abstract public class Tournament implements Serializable {
         this.sport = sport;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.teams = FXCollections.observableArrayList();
+        this.teams = new ArrayList<>();
         this.hasFinished = false;
     }
     // another constructor without endDate; automatically set by the system
@@ -34,7 +34,7 @@ abstract public class Tournament implements Serializable {
         this.isIndividual = isIndividual;
         this.sport = sport;
         this.startDate = startDate;
-        this.teams = FXCollections.observableArrayList();
+        this.teams = new ArrayList<>();
         this.hasFinished = false;
     }
 
@@ -54,7 +54,7 @@ abstract public class Tournament implements Serializable {
     public String getSport() {
         return sport;
     }
-    public ObservableList<Team> getTeams() {
+    public ArrayList<Team> getTeams() {
         return teams;
     }
     public int getNumberOfTeams() {
@@ -98,12 +98,25 @@ abstract public class Tournament implements Serializable {
     }
 
     public String getDetails() {
-        String Details = "Name: " + name + "\n" +
+        String details;
+        if(this.getClass().getName() == "com.example.tournamnetproj.RoundRobin") {
+         details = "Type: " +"RoundRobin"+ "\n" +
+                "Name: " + name + "\n" +
                 "Sport: " + sport + "\n" +
                 "Start Date: " + startDate + "\n" +
                 "End Date: " + endDate + "\n" +
                 "Number of Teams: " + teams.size() + "\n" +
-                "Winner: " + winner + "\n";
-        return Details;
+                "Winner: " + winner + "\n";}
+        else{
+            details = "Type: " +"elimination"+ "\n" +
+                    "Name: " + name + "\n" +
+                    "Sport: " + sport + "\n" +
+                    "Start Date: " + startDate + "\n" +
+                    "End Date: " + endDate + "\n" +
+                    "Number of Teams: " + teams.size() + "\n" +
+                    "Winner: " + winner + "\n";
+        }
+
+        return details;
     }
 }
