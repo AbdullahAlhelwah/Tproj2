@@ -1,9 +1,11 @@
 package com.example.tournamnetproj;
+
 import java.io.*;
 import java.util.ArrayList;
 
 public class Main {
     public static ArrayList<Tournament> tournaments = new ArrayList<>();
+
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         loadTournaments();
         HelloApplication.main(args);
@@ -13,7 +15,7 @@ public class Main {
     // a method to save the tournaments objects to a file named "tournaments.bin"
     private static void saveTournaments() {
         //if there are no tournament to save, just exit
-        if(tournaments == null)
+        if (tournaments == null)
             return;
         try {
             // Open an output stream to save the tournaments to the file
@@ -40,7 +42,7 @@ public class Main {
     // a method to load the tournaments objects from a file named "tournaments.bin"
     public static void loadTournaments() throws IOException, ClassNotFoundException {
         // if file does not exist, just exit
-        if(!new File("tournaments.bin").exists())
+        if (!new File("tournaments.bin").exists())
             return;
         // Open an input stream to read from the file
         FileInputStream fis = new FileInputStream("tournaments.bin");
@@ -58,7 +60,7 @@ public class Main {
                 tournaments.add(elimination);
             } else if (tournament instanceof RoundRobin) {
                 RoundRobin roundRobin = (RoundRobin) tournament;
-                tournaments.add(roundRobin) ;
+                tournaments.add(roundRobin);
             } else {
                 tournaments.add(tournament);
             }
@@ -69,7 +71,6 @@ public class Main {
         fis.close();
 
     }
-
 
 
 }

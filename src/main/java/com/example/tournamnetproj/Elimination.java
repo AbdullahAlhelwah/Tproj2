@@ -1,9 +1,10 @@
 package com.example.tournamnetproj;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
-public class Elimination extends Tournament implements java.io.Serializable{
+public class Elimination extends Tournament implements java.io.Serializable {
     // attributes
 
 
@@ -12,6 +13,7 @@ public class Elimination extends Tournament implements java.io.Serializable{
         super(name, isIndividual, sport, startDate, endDate);
         this.matches = new ArrayList<Match>();
     }
+
     // another constructor without endDate; automatically set by the system
     public Elimination(String name, boolean isIndividual, String sport, Date startDate) {
         super(name, isIndividual, sport, startDate);
@@ -48,7 +50,7 @@ public class Elimination extends Tournament implements java.io.Serializable{
 
         // get necessary information about the tree
         Date date;
-        int leafs = (getNumberOfTeams() +1 ) / 2;
+        int leafs = (getNumberOfTeams() + 1) / 2;
         int height = (int) Math.ceil(Math.log(leafs) / Math.log(2));
 
         //fill the tree, starting from the top, stop before the leafs
@@ -76,13 +78,13 @@ public class Elimination extends Tournament implements java.io.Serializable{
 
         //fill the leafs, starting from the left, each leaf add the start date and one team only
         int Maxi = (int) Math.pow(2, height);
-        for(int i = 0; i < Maxi; i++) {
+        for (int i = 0; i < Maxi; i++) {
             matches.add(new Match(this, getStartDate(), teamsCopy.get(i)));
         }
 
         //fill the rest of the matches, starting from the first leaf, each match add one team only
         for (int i = 0; i < Maxi && i + Maxi < teamsCopy.size(); i++) {
-            matches.get(i + stop).setTeam2(teamsCopy.get(i +  Maxi));
+            matches.get(i + stop).setTeam2(teamsCopy.get(i + Maxi));
         }
 
         //for the leafs, if there is a match with only one team, then the team will go to the next round
@@ -92,14 +94,14 @@ public class Elimination extends Tournament implements java.io.Serializable{
                 if ((i - stop) % 2 == 0) {
                     matches.get((i - 1) / 2).setTeam1(matches.get(i).getTeam1());
                 } else {
-                    matches.get((i - 1 ) / 2).setTeam2(matches.get(i).getTeam1());
+                    matches.get((i - 1) / 2).setTeam2(matches.get(i).getTeam1());
                 }
             }
         }
     }
 
     // a method to update the matches, in case of a winnner result, the winner will go to the next round
-    public void updateBracket(Match match){
+    public void updateBracket(Match match) {
         //get the index of the match
         int index = matches.indexOf(match);
         //if the match is the final match, the winner will be the winner of the tournament
@@ -108,7 +110,7 @@ public class Elimination extends Tournament implements java.io.Serializable{
             return;
         }
         //if the match is even, the winner will go to the next match, team 1
-        if ((index - matches.size())% 2 == 0)
+        if ((index - matches.size()) % 2 == 0)
             matches.get((index - 1) / 2).setTeam1(match.getWinner());
             //if the match is odd, the winner will go to the next match, team 2
         else
@@ -120,22 +122,23 @@ public class Elimination extends Tournament implements java.io.Serializable{
 
 
     // a method to remove the affected team from the matches above the given match, in case of a editied match
-    public void editBracket(Match match){
+    public void editBracket(Match match) {
         //get the index of the match
         int index = matches.indexOf(match);
         //if the match is even, the team 1 will be removed
         if ((matches.size() - index) % 2 == 0) {
-            matches.get((index-1) / 2).setTeam1(null);
+            matches.get((index - 1) / 2).setTeam1(null);
             //if the match is odd, the team 2 will be removed
         } else {
-            matches.get((index-1) / 2).setTeam2(null);
+            matches.get((index - 1) / 2).setTeam2(null);
         }
         //if the match is just under the root, no need to call the helper method
-        if ((index-1)/2 != 0){
-            helper((((index-1) / 2) - 1) / 2);
+        if ((index - 1) / 2 != 0) {
+            helper((((index - 1) / 2) - 1) / 2);
         }
 
     }
+
     // a helper method to remove the affected team from the matches above the given match, in case of a editied match
     private void helper(int i) {
         //make a new match, keep the date and tournament only
@@ -143,8 +146,8 @@ public class Elimination extends Tournament implements java.io.Serializable{
         //replace the match with the new match
         matches.set(i, match);
         //call the helper method again if the index is greater than 0
-        if (i > 0){
-            helper((i-1) / 2);
+        if (i > 0) {
+            helper((i - 1) / 2);
         }
 
     }

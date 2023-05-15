@@ -1,12 +1,5 @@
 package com.example.tournamnetproj;
 
-import java.io.IOException;
-import java.net.URL;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -17,11 +10,17 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.net.URL;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.ResourceBundle;
 
 public class firstPageController implements Initializable {
 
@@ -43,15 +42,16 @@ public class firstPageController implements Initializable {
     String[] currentTournament = new String[Main.tournaments.size()];
 
     {
-        for(int i = 0; i < Main.tournaments.size(); i++) {
+        for (int i = 0; i < Main.tournaments.size(); i++) {
             currentTournament[i] = Main.tournaments.get(i).getName();
         }
     }
 
     // this array is to display the details of a tournament.
     Tournament[] currentTournamentT = new Tournament[Main.tournaments.size()];
+
     {
-        for(int i = 0; i < Main.tournaments.size(); i++) {
+        for (int i = 0; i < Main.tournaments.size(); i++) {
             currentTournamentT[i] = Main.tournaments.get(i);
         }
     }
@@ -66,7 +66,7 @@ public class firstPageController implements Initializable {
     public void switchToLogInPage(ActionEvent event) {
         try {
             root = FXMLLoader.load(getClass().getResource("loginPage.fxml"));
-            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
@@ -94,15 +94,15 @@ public class firstPageController implements Initializable {
     }
 
     private void displayInfo(ListView<String> currentTournaments) {
-        currentTournaments.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>()  {
+        currentTournaments.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 
             @Override
             public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
                 selectedTournament = currentTournaments.getSelectionModel().getSelectedItem(); // get the name of the selected tournament
 
                 //search for the tournament and display its details
-                for(int i = 0; i < currentTournamentT.length; i++) {
-                    if(currentTournamentT[i].getName().equals(selectedTournament)) {
+                for (int i = 0; i < currentTournamentT.length; i++) {
+                    if (currentTournamentT[i].getName().equals(selectedTournament)) {
                         String details = currentTournamentT[i].getDetails();
                         Text text = new Text(details);
                         textFlow.getChildren().clear();
@@ -114,11 +114,10 @@ public class firstPageController implements Initializable {
     }
 
 
-
     public void addTournament(ActionEvent actionEvent) {
         try {
             root = FXMLLoader.load(getClass().getResource("addTournament.fxml"));
-            stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+            stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
@@ -165,12 +164,12 @@ public class firstPageController implements Initializable {
             return;
         }
         //add the tournament
-        if(type.equals("Elimination")){
+        if (type.equals("Elimination")) {
             //create the tournament
             Date startDate = Date.from(start.atStartOfDay(ZoneId.systemDefault()).toInstant());
             Date endDate = Date.from(end.atStartOfDay(ZoneId.systemDefault()).toInstant());
             Tournament tournament;
-            if(isIndividual.equals("Individual"))
+            if (isIndividual.equals("Individual"))
                 tournament = new Elimination(name, true, sport, startDate, endDate);
             else
                 tournament = new Elimination(name, false, sport, startDate, endDate);
@@ -200,10 +199,10 @@ public class firstPageController implements Initializable {
             if (isIndividual.equals("Individual"))
                 tournament = new RoundRobin(name, true, sport, startDate);
             else
-                tournament = new RoundRobin(name,false, sport, startDate);
+                tournament = new RoundRobin(name, false, sport, startDate);
 
             // add the tournament to the list of tournaments, make it round robin type
-            Main.tournaments.add((RoundRobin)tournament);
+            Main.tournaments.add((RoundRobin) tournament);
 
             // show a success message
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -224,9 +223,6 @@ public class firstPageController implements Initializable {
             }
         }
     }
-
-
-
 
 
 }

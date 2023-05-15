@@ -9,7 +9,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.ResourceBundle;
 
 public class RoundRobinTableController implements Initializable {
 
@@ -37,26 +40,23 @@ public class RoundRobinTableController implements Initializable {
     @FXML
     private Label tour_name;
 
-    RoundRobin r = new RoundRobin("dd",false,"football",new Date(1111111));
-    Team team = new Team(r,"blgndu");
-    Team team2 = new Team(r,"6666");
-
-
+    RoundRobin r = new RoundRobin("dd", false, "football", new Date(1111111));
+    Team team = new Team(r, "blgndu");
+    Team team2 = new Team(r, "6666");
 
 
     ArrayList<Team> list = new ArrayList<>();
 
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tour_name.setText(r.getName());
-        team_draws.setCellValueFactory(new PropertyValueFactory<Team,Integer>("draws"));
-        team_losses.setCellValueFactory(new PropertyValueFactory<Team,Integer>("losses"));
-        team_wins.setCellValueFactory(new PropertyValueFactory<Team,Integer>("wins"));
-        team_points.setCellValueFactory(new PropertyValueFactory<Team,Integer>("points"));
-        team_gd.setCellValueFactory(new PropertyValueFactory<Team,Integer>("goalDifference"));
-        team_name.setCellValueFactory(new PropertyValueFactory<Team,String>("name"));
+        team_draws.setCellValueFactory(new PropertyValueFactory<Team, Integer>("draws"));
+        team_losses.setCellValueFactory(new PropertyValueFactory<Team, Integer>("losses"));
+        team_wins.setCellValueFactory(new PropertyValueFactory<Team, Integer>("wins"));
+        team_points.setCellValueFactory(new PropertyValueFactory<Team, Integer>("points"));
+        team_gd.setCellValueFactory(new PropertyValueFactory<Team, Integer>("goalDifference"));
+        team_name.setCellValueFactory(new PropertyValueFactory<Team, String>("name"));
         team.addPoints(7);
         team.addGoalsReceived(3);
         team.addGoalsScored(15);

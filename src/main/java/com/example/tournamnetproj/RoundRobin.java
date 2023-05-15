@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
-public class RoundRobin extends Tournament implements java.io.Serializable{
+public class RoundRobin extends Tournament implements java.io.Serializable {
 
 
     // constructor
@@ -26,22 +26,23 @@ public class RoundRobin extends Tournament implements java.io.Serializable{
             throw new Exception("Tournament has finished");
         }
         ArrayList<Team> teamsCopy = new ArrayList<Team>(getTeams());
-        if (teamsCopy.size()%2 == 1) teamsCopy.add(null);
+        if (teamsCopy.size() % 2 == 1) teamsCopy.add(null);
         Collections.shuffle(teamsCopy);
         ArrayList<Team> opponent = new ArrayList<>(teamsCopy);
         opponent.remove(0);
-        int nRounds = teamsCopy.size() -1;
-        for(int round = 0; round < nRounds; round++){
-            matches.add(new Match(this,teamsCopy.get(0),opponent.get(0),
-                    new Date(getStartDate().getTime()+restDays*round*24 * 60 * 60 * 1000)));
-            for(int i= 1; i< teamsCopy.size()/2; i++){
-                matches.add(new Match(this,opponent.get(opponent.size()-i),opponent.get(i),
-                        new Date(getStartDate().getTime()+restDays*round*24 * 60 * 60 * 1000)));
+        int nRounds = teamsCopy.size() - 1;
+        for (int round = 0; round < nRounds; round++) {
+            matches.add(new Match(this, teamsCopy.get(0), opponent.get(0),
+                    new Date(getStartDate().getTime() + restDays * round * 24 * 60 * 60 * 1000)));
+            for (int i = 1; i < teamsCopy.size() / 2; i++) {
+                matches.add(new Match(this, opponent.get(opponent.size() - i), opponent.get(i),
+                        new Date(getStartDate().getTime() + restDays * round * 24 * 60 * 60 * 1000)));
             }
-            Collections.rotate(opponent,1);
+            Collections.rotate(opponent, 1);
         }
 
     }
+
     public void viewStanding() {
     }
 

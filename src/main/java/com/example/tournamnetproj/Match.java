@@ -12,20 +12,22 @@ public class Match {
     private boolean finshed = false;
 
     //Match constructor
-    public Match(Tournament t, Team a, Team b, Date d){
-        tournament  = t;
+    public Match(Tournament t, Team a, Team b, Date d) {
+        tournament = t;
         team1 = a;
         team2 = b;
         date = d;
     }
+
     //another constructors with 1/without Teams
-    public Match(Tournament t, Date d, Team a){
-        tournament  = t;
+    public Match(Tournament t, Date d, Team a) {
+        tournament = t;
         date = d;
         team1 = a;
     }
-    public Match(Tournament t, Date d){
-        tournament  = t;
+
+    public Match(Tournament t, Date d) {
+        tournament = t;
         date = d;
     }
 
@@ -34,23 +36,31 @@ public class Match {
     public Date getDate() {
         return date;
     }
+
     public int getGoals1() {
         return goals1;
     }
+
     public int getGoals2() {
         return goals2;
     }
+
     public Team getTeam1() {
         return team1;
     }
+
     public Team getTeam2() {
         return team2;
-    }public Tournament getTournament() {
+    }
+
+    public Tournament getTournament() {
         return tournament;
     }
+
     public boolean gethasFinshed() {
         return finshed;
     }
+
     public Team getWinner() {
         //if the match is not finished, return null
         if (!finshed) {
@@ -72,15 +82,17 @@ public class Match {
     public void setDate(Date date) {
         this.date = date;
     }
+
     public void setTeam1(Team team1) {
         this.team1 = team1;
     }
+
     public void setTeam2(Team team2) {
         this.team2 = team2;
     }
 
     // a method to record the score of the match (We can use this method to edit the score as well as record it)
-    public void recordScore(int a, int b) throws Exception{
+    public void recordScore(int a, int b) throws Exception {
         //if there is no team1 or team2, throw an exception
         if (team1 == null || team2 == null) {
             throw new Exception("There must be two teams");
@@ -143,6 +155,7 @@ public class Match {
         }
 
     }
+
     // a method to edit the score of the match
     private void editScore(int a, int b) throws Exception {
         // if it is a round robin tournament, update the points of the teams
